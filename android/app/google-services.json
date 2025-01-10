@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "451860151967",
+    "project_id": "carworkshop-59450",
+    "storage_bucket": "carworkshop-59450.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:451860151967:android:a63ac83db8aa1b20a72caa",
+        "android_client_info": {
+          "package_name": "com.example.car_workshop_mobile_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcuDL1dGX35bHz0L9MhZsCKriIK_0yc1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
