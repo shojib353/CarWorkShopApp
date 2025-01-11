@@ -48,6 +48,7 @@ class DefaultFirebaseOptions {
     authDomain: 'carworkshop-59450.firebaseapp.com',
     storageBucket: 'carworkshop-59450.firebasestorage.app',
     measurementId: 'G-935X0P49LW',
+    databaseURL:"https://carworkshop-59450-default-rtdb.asia-southeast1.firebasedatabase.app",
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -56,6 +57,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '451860151967',
     projectId: 'carworkshop-59450',
     storageBucket: 'carworkshop-59450.firebasestorage.app',
+    databaseURL:"https://carworkshop-59450-default-rtdb.asia-southeast1.firebasedatabase.app",
+
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -65,6 +68,7 @@ class DefaultFirebaseOptions {
     projectId: 'carworkshop-59450',
     storageBucket: 'carworkshop-59450.firebasestorage.app',
     iosBundleId: 'com.example.carWorkshopMobileApp',
+    databaseURL:"https://carworkshop-59450-default-rtdb.asia-southeast1.firebasedatabase.app",
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -74,6 +78,7 @@ class DefaultFirebaseOptions {
     projectId: 'carworkshop-59450',
     storageBucket: 'carworkshop-59450.firebasestorage.app',
     iosBundleId: 'com.example.carWorkshopMobileApp',
+    databaseURL:"https://carworkshop-59450-default-rtdb.asia-southeast1.firebasedatabase.app",
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
