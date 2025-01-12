@@ -1,10 +1,10 @@
 import 'package:car_workshop_mobile_app/presentation/screens/booking_screen.dart';
-import 'package:car_workshop_mobile_app/presentation/screens/drawer.dart';
-import 'package:car_workshop_mobile_app/presentation/widgets/home_screen.dart';
+import 'package:car_workshop_mobile_app/presentation/screens/home_screen.dart';
+import 'package:car_workshop_mobile_app/presentation/widgets/drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/calender_screen.dart';
+import 'calender_screen.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key, required this.email, required this.id});

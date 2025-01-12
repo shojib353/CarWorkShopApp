@@ -1,4 +1,4 @@
-import 'package:car_workshop_mobile_app/presentation/screens/main_page.dart';
+import 'package:car_workshop_mobile_app/presentation/screens/main_screen.dart';
 import 'package:car_workshop_mobile_app/presentation/screens/signup_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -109,9 +109,10 @@ class _SigninScreenState extends State<SigninScreen> {
               context,
               MaterialPageRoute(
                   builder: (context) => MainPage(
-                      email: _emailController.text,id:userCredential.user!.uid.toString())), // Navigate to Admin page
+                      email: _emailController.text,
+                      id: userCredential.user!.uid
+                          .toString())), // Navigate to Admin page
             );
-
           }
           ;
         }
