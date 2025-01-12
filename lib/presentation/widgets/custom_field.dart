@@ -20,7 +20,9 @@ class _CustomTextFieldState extends State<CustomField> {
     return TextFormField(
       controller: widget.controller,
       decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
         filled: true,
         fillColor: Colors.white,
         label: Text(widget.label),
