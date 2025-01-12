@@ -1,9 +1,8 @@
 import 'package:car_workshop_mobile_app/presentation/screens/main_page.dart';
 import 'package:car_workshop_mobile_app/presentation/screens/signup_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:flutter/material.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -18,7 +17,6 @@ class _SigninScreenState extends State<SigninScreen> {
   final _passwordController = TextEditingController();
   String _selectedRole = "Admin";
 
-
   Future<void> _resetPassword() async {
     if (_emailController.text.isNotEmpty) {
       try {
@@ -30,14 +28,14 @@ class _SigninScreenState extends State<SigninScreen> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('Password Reset'),
-              content: Text('A password reset email has been sent.'),
+              title: const Text('Password Reset'),
+              content: const Text('A password reset email has been sent.'),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text('OK'),
+                  child: const Text('OK'),
                 ),
               ],
             );
@@ -49,14 +47,14 @@ class _SigninScreenState extends State<SigninScreen> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('Error'),
+              title: const Text('Error'),
               content: Text(errorMessage),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text('OK'),
+                  child: const Text('OK'),
                 ),
               ],
             );
@@ -69,14 +67,14 @@ class _SigninScreenState extends State<SigninScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Enter Email'),
-            content: Text('Please enter your email address.'),
+            title: const Text('Enter Email'),
+            content: const Text('Please enter your email address.'),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           );
@@ -85,13 +83,12 @@ class _SigninScreenState extends State<SigninScreen> {
     }
   }
 
-
-
   Future<void> _signIn() async {
     if (_formKey.currentState!.validate()) {
       try {
         // Sign in the user with email and password
-        UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _emailController.text,
           password: _passwordController.text,
         );
@@ -109,14 +106,18 @@ class _SigninScreenState extends State<SigninScreen> {
           if (role == _selectedRole) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => MainPage()), // Navigate to Admin page
+              MaterialPageRoute(
+                  builder: (context) => MainPage(
+                      email: _emailController.text)), // Navigate to Admin page
             );
           } else if (role == _selectedRole) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => MainPage()), // Navigate to Mechanic page
+              MaterialPageRoute(
+                  builder: (context) => MainPage(email: _emailController.text)),
             );
           }
+          ;
         }
       } on FirebaseAuthException catch (e) {
         String errorMessage = e.message ?? 'An error occurred during sign-in';
@@ -125,14 +126,14 @@ class _SigninScreenState extends State<SigninScreen> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('Sign In Failed'),
+              title: const Text('Sign In Failed'),
               content: Text(errorMessage),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text('OK'),
+                  child: const Text('OK'),
                 ),
               ],
             );
@@ -141,7 +142,6 @@ class _SigninScreenState extends State<SigninScreen> {
       }
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -153,19 +153,19 @@ class _SigninScreenState extends State<SigninScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 100),
-              Text(
+              const SizedBox(height: 100),
+              const Text(
                 'Sign In',
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 60),
+              const SizedBox(height: 60),
               Form(
                 key: _formKey,
                 child: Column(
                   children: [
                     TextFormField(
                       controller: _emailController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Email address',
                         hintText: 'Enter your email',
                         border: OutlineInputBorder(),
@@ -183,10 +183,10 @@ class _SigninScreenState extends State<SigninScreen> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     TextFormField(
                       controller: _passwordController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Password',
                         hintText: 'Enter 8-digit password',
                         border: OutlineInputBorder(),
@@ -205,12 +205,12 @@ class _SigninScreenState extends State<SigninScreen> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       children: [
                         Expanded(
                           child: ListTile(
-                            title: Text('Admin'),
+                            title: const Text('Admin'),
                             leading: Radio<String>(
                               value: 'Admin',
                               groupValue: _selectedRole,
@@ -224,7 +224,7 @@ class _SigninScreenState extends State<SigninScreen> {
                         ),
                         Expanded(
                           child: ListTile(
-                            title: Text('Mechanic'),
+                            title: const Text('Mechanic'),
                             leading: Radio<String>(
                               value: 'Mechanic',
                               groupValue: _selectedRole,
@@ -241,17 +241,17 @@ class _SigninScreenState extends State<SigninScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {
                     _resetPassword();
                   },
-                  child: Text('Forgot Password?'),
+                  child: const Text('Forgot Password?'),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -259,27 +259,29 @@ class _SigninScreenState extends State<SigninScreen> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  minimumSize: Size(double.infinity, 50),
+                  minimumSize: const Size(double.infinity, 50),
                   backgroundColor: Colors.red,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: Text('Log In', style: TextStyle(fontSize: 18)),
+                child: const Text('Log In',
+                    style: TextStyle(fontSize: 18, color: Colors.white)),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don’t have an account? "),
+                  const Text("Don’t have an account? "),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => SignupScreen()),
+                        MaterialPageRoute(
+                            builder: (context) => const SignupScreen()),
                       );
                     },
-                    child: Text(
+                    child: const Text(
                       'Sign Up',
                       style: TextStyle(
                           color: Colors.red, fontWeight: FontWeight.bold),
