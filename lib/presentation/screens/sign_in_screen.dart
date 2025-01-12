@@ -104,18 +104,14 @@ class _SigninScreenState extends State<SigninScreen> {
 
           // Navigate to the appropriate screen based on the role
           if (role == _selectedRole) {
+            print(role);
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                   builder: (context) => MainPage(
-                      email: _emailController.text)), // Navigate to Admin page
+                      email: _emailController.text,id:userCredential.user!.uid.toString())), // Navigate to Admin page
             );
-          } else if (role == _selectedRole) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => MainPage(email: _emailController.text)),
-            );
+
           }
           ;
         }

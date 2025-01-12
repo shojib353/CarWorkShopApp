@@ -1,9 +1,8 @@
+import 'package:car_workshop_mobile_app/model/booking_model.dart';
+import 'package:car_workshop_mobile_app/model/meeting.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-
-import '../../model/booking_model.dart';
-import '../../model/meeting.dart';
 
 class CalenderScreen extends StatefulWidget {
   const CalenderScreen(

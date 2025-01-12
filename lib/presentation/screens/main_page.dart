@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
 import '../widgets/calender_screen.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({super.key, required this.email});
+  const MainPage({super.key, required this.email, required this.id});
   final String email;
+  final String id;
 
   @override
   State<MainPage> createState() => _HomeScreenState();
@@ -21,35 +22,47 @@ class _HomeScreenState extends State<MainPage> {
   String? userName;
   String? role;
 
-  Future<String?> getUser() async {
+  Future<void> getUser() async {
     try {
-      final snapshot = await db.collection('users').doc(widget.email).get();
-      final data = snapshot.data() as Map<String, dynamic>;
-      setState(() {
-        userName = data['name'];
-        role = data['role'];
-      });
+      final snapshot = await db.collection('users').doc(widget.id).get();
+      final data = snapshot.data();
+      if (data != null) {
+        setState(() {
+          userName = data['name'];
+          role = data['role'];
+        });
+      }
     } catch (e) {
-      return 'Error fetching user';
+      debugPrint('Error fetching user data: $e');
     }
-    return null;
   }
 
   void _onItemTapped(int index) {
-    _isBookingScreen = false;
-    _selectedIndex = index;
-    setState(() {});
+    setState(() {
+      _isBookingScreen = false;
+      _selectedIndex = index;
+    });
   }
 
   @override
   void initState() {
-    getUser();
     super.initState();
+    getUser();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> _pages = [
+    if (userName == null || role == null) {
+      // Show a loading indicator while user data is being fetched
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
+    // Pages for bottom navigation
+    final List<Widget> _pages = [
       HomeScreen(
         role: role!,
         onAddMechanicTap: () {
@@ -75,15 +88,15 @@ class _HomeScreenState extends State<MainPage> {
         backgroundColor: Colors.cyan,
         foregroundColor: Colors.white,
         actions: [
-          (role == 'Admin')
-              ? IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _isBookingScreen = true;
-                    });
-                  },
-                  icon: const Icon(Icons.add))
-              : Container(),
+          if (role == 'Admin')
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  _isBookingScreen = true;
+                });
+              },
+              icon: const Icon(Icons.add),
+            ),
         ],
         title: const Text(
           "Car Servicing App",
