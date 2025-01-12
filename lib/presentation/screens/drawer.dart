@@ -1,10 +1,11 @@
+import 'package:car_workshop_mobile_app/presentation/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 
-import 'sign_in_screen.dart';
-
-
 class AppDrawer extends StatelessWidget {
-  const AppDrawer({super.key});
+  const AppDrawer({super.key, required this.userName, required this.role});
+
+  final String? userName;
+  final String? role;
 
   @override
   Widget build(BuildContext context) {
@@ -13,28 +14,23 @@ class AppDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.orange,
             ),
-
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage("assets/images"),
-                    radius: 35,
-                  ),
-                  SizedBox(height: 7),
+                  const SizedBox(height: 7),
                   Text(
-                    "userName",
-                    style: TextStyle(
+                    userName ?? 'Loading...',
+                    style: const TextStyle(
                       fontSize: 22,
                       color: Colors.white,
                     ),
                   ),
                   Text(
-                    "user Designation",
-                    style: TextStyle(
+                    role ?? 'Loading..',
+                    style: const TextStyle(
                       fontSize: 16,
                       color: Colors.white,
                     ),
@@ -44,12 +40,12 @@ class AppDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.logout),
-            title: Text('Logout'),
+            leading: const Icon(Icons.logout),
+            title: const Text('Logout'),
             onTap: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => SigninScreen()),
+                MaterialPageRoute(builder: (context) => const SigninScreen()),
               );
             },
           ),
