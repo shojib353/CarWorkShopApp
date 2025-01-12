@@ -11,12 +11,11 @@ class BookingScreen extends StatefulWidget {
 
 class _BookingScreenState extends State<BookingScreen> {
   List<String> mechanicsName = [];
-  String dropdownFirstValue = '';
+  String dropdownValue = '';
   var db = FirebaseFirestore.instance;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     fetchMechanic();
   }
@@ -28,7 +27,7 @@ class _BookingScreenState extends State<BookingScreen> {
       mechanicsName =
           snapshot.docs.map((element) => element['name'] as String).toList();
       if (mechanicsName.isNotEmpty) {
-        dropdownFirstValue = mechanicsName[0];
+        dropdownValue = mechanicsName[0];
       }
     });
   }
@@ -64,21 +63,13 @@ class _BookingScreenState extends State<BookingScreen> {
                     fontSize: 20,
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 CustomField(label: 'Full Name', controller: nameController),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 CustomField(label: 'Phone', controller: phoneController),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 CustomField(label: 'Email', controller: emailController),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 const Text(
                   'Car Details',
                   style: TextStyle(
@@ -86,26 +77,16 @@ class _BookingScreenState extends State<BookingScreen> {
                     fontSize: 20,
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 CustomField(label: 'Make', controller: makeController),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 CustomField(label: 'Model', controller: modelController),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 CustomField(label: 'Year', controller: yearController),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 CustomField(
                     label: 'Registration Plate', controller: plateController),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 const Text(
                   'Booking Details',
                   style: TextStyle(
@@ -113,31 +94,23 @@ class _BookingScreenState extends State<BookingScreen> {
                     fontSize: 20,
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 CustomField(label: 'Title', controller: titleController),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 CustomField(label: 'Start Date', controller: startController),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 CustomField(label: 'End Date', controller: endController),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       'Assigning Mechanic',
                       style: TextStyle(fontSize: 18),
                     ),
                     const SizedBox(width: 10),
                     DropdownButton(
                       // Initial Value
-                      value: dropdownFirstValue,
+                      value: dropdownValue,
 
                       // Down Arrow Icon
                       icon: const Icon(
@@ -162,7 +135,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       // change button value to selected value
                       onChanged: (String? newValue) {
                         setState(() {
-                          mechanicsName = newValue! as List<String>;
+                          dropdownValue = newValue!;
                         });
                       },
                     ),
@@ -172,7 +145,7 @@ class _BookingScreenState extends State<BookingScreen> {
                 Center(
                   child: Container(
                     width: double.infinity,
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -190,7 +163,7 @@ class _BookingScreenState extends State<BookingScreen> {
                               'title': titleController.text,
                               'start': startController.text,
                               'end': endController.text,
-                              'mechanic': mechanicsName,
+                              'mechanic': dropdownValue,
                             };
 
                             await db
@@ -212,7 +185,7 @@ class _BookingScreenState extends State<BookingScreen> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.orange),
+                            backgroundColor: Colors.cyan),
                         child: const Padding(
                           padding: EdgeInsets.symmetric(vertical: 10),
                           child: Text(

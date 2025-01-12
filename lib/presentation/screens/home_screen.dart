@@ -49,10 +49,52 @@ class _HomeScreenState extends State<HomeScreen> {
                 ? ListView.builder(
                     itemCount: bookings.length,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        leading: Text('${index + 1}'),
-                        title: Text(bookings[index].name!),
-                        subtitle: Text(bookings[index].mechanic!),
+                      return Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Card(
+                          elevation: 3,
+                          child: Row(
+                            children: [
+                              const SizedBox(width: 10),
+                              CircleAvatar(
+                                radius: 25,
+                                child: Text(
+                                  '${index + 1}',
+                                  style: const TextStyle(fontSize: 22),
+                                ),
+                              ),
+                              const SizedBox(width: 20),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      bookings[index].title!,
+                                      style: const TextStyle(
+                                        color: Color.fromARGB(255, 25, 25, 25),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 3),
+                                    Text(
+                                      'Assigned Mechanic: ${bookings[index].mechanic!}',
+                                    ),
+                                    const SizedBox(height: 3),
+                                    Text(
+                                      'Start: ${bookings[index].start!}',
+                                    ),
+                                    const SizedBox(height: 3),
+                                    Text('End: ${bookings[index].end!}'),
+                                    const SizedBox(height: 3),
+                                    Text('Plate: ${bookings[index].plate!}')
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
                       );
                     })
                 : Padding(
@@ -63,8 +105,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           color: Colors.deepOrange.shade400),
-                      child: Center(
-                        child: const Text(
+                      child: const Center(
+                        child: Text(
                           'Welcome to Car Servicing App',
                           style: TextStyle(
                             fontSize: 18,

@@ -15,11 +15,15 @@ class AppDrawer extends StatelessWidget {
         children: [
           DrawerHeader(
             decoration: const BoxDecoration(
-              color: Colors.orange,
+              color: Colors.cyan,
             ),
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  const CircleAvatar(
+                    backgroundImage: AssetImage('assets/images/avatar.jpg'),
+                    radius: 35,
+                  ),
                   const SizedBox(height: 7),
                   Text(
                     userName ?? 'Loading...',
