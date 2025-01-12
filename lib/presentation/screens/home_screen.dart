@@ -45,19 +45,35 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Center(
         child: bookings.isEmpty
             ? const CircularProgressIndicator()
-            : ListView.builder(
-                itemCount: bookings.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    leading: Text('${index + 1}'),
-                    title: Expanded(
-                      child: Text(bookings[index].name!),
+            : (widget.role == 'Admin')
+                ? ListView.builder(
+                    itemCount: bookings.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        leading: Text('${index + 1}'),
+                        title: Text(bookings[index].name!),
+                        subtitle: Text(bookings[index].mechanic!),
+                      );
+                    })
+                : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Container(
+                      height: 200,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.deepOrange.shade400),
+                      child: Center(
+                        child: const Text(
+                          'Welcome to Car Servicing App',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                     ),
-                    subtitle: Expanded(
-                      child: Text(bookings[index].mechanic!),
-                    ),
-                  );
-                }),
+                  ),
       ),
     );
   }
