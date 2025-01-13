@@ -2,8 +2,17 @@ import 'package:car_workshop_mobile_app/presentation/widgets/custom_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/drawer.dart';
+
 class BookingScreen extends StatefulWidget {
-  const BookingScreen({super.key});
+  const BookingScreen({
+    super.key,
+    required this.userName,
+    required this.userRole,
+  });
+
+  final String userName;
+  final String userRole;
 
   @override
   State<BookingScreen> createState() => _BookingScreenState();
@@ -48,6 +57,21 @@ class _BookingScreenState extends State<BookingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: AppDrawer(
+        userName: widget.userName,
+        role: widget.userRole,
+      ),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.cyan,
+        foregroundColor: Colors.white,
+        title: const Text(
+          "Car Servicing App",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -144,56 +168,81 @@ class _BookingScreenState extends State<BookingScreen> {
                 const SizedBox(height: 10),
                 Center(
                   child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: ElevatedButton(
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            Map<String, Object> bookingData = {
-                              'name': nameController.text,
-                              'phone': phoneController.text,
-                              'email': emailController.text,
-                              'make': makeController.text,
-                              'model': modelController.text,
-                              'year': yearController.text,
-                              'plate': plateController.text,
-                              'title': titleController.text,
-                              'start': startController.text,
-                              'end': endController.text,
-                              'mechanic': dropdownValue,
-                            };
-
-                            await db
-                                .collection('booking')
-                                .add(bookingData)
-                                .then((value) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Booking Successful'),
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.grey.shade300),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                child: Text(
+                                  'Skip',
+                                  style: TextStyle(
+                                      color: Colors.blueGrey, fontSize: 16),
                                 ),
-                              );
-                            }, onError: (error) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Booking Failed'),
-                                ),
-                              );
-                            });
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.cyan),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          child: Text(
-                            'Book Now',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
+                              ),
+                            ),
                           ),
-                        )),
-                  ),
+                          const SizedBox(width: 15),
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  Map<String, Object> bookingData = {
+                                    'name': nameController.text,
+                                    'phone': phoneController.text,
+                                    'email': emailController.text,
+                                    'make': makeController.text,
+                                    'model': modelController.text,
+                                    'year': yearController.text,
+                                    'plate': plateController.text,
+                                    'title': titleController.text,
+                                    'start': startController.text,
+                                    'end': endController.text,
+                                    'mechanic': dropdownValue,
+                                  };
+
+                                  await db
+                                      .collection('booking')
+                                      .add(bookingData)
+                                      .then((value) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text('Booking Successful'),
+                                      ),
+                                    );
+                                  }, onError: (error) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text('Booking Failed'),
+                                      ),
+                                    );
+                                  });
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.cyan),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                child: Text(
+                                  'Book Now',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 16),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
                 )
               ],
             ),

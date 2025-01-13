@@ -245,7 +245,10 @@ class _SigninScreenState extends State<SigninScreen> {
                   onPressed: () {
                     _resetPassword();
                   },
-                  child: const Text('Forgot Password?'),
+                  child: const Text(
+                    'Forgot Password?',
+                    style: TextStyle(color: Colors.cyan),
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
@@ -257,7 +260,7 @@ class _SigninScreenState extends State<SigninScreen> {
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
-                  backgroundColor: Colors.red,
+                  backgroundColor: Colors.cyan,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -281,7 +284,7 @@ class _SigninScreenState extends State<SigninScreen> {
                     child: const Text(
                       'Sign Up',
                       style: TextStyle(
-                          color: Colors.red, fontWeight: FontWeight.bold),
+                          color: Colors.cyan, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
