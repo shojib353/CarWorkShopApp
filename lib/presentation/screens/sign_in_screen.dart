@@ -1,4 +1,4 @@
-import 'package:car_workshop_mobile_app/presentation/screens/main_page.dart';
+import 'package:car_workshop_mobile_app/presentation/screens/main_screen.dart';
 import 'package:car_workshop_mobile_app/presentation/screens/signup_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -109,9 +109,10 @@ class _SigninScreenState extends State<SigninScreen> {
               context,
               MaterialPageRoute(
                   builder: (context) => MainPage(
-                      email: _emailController.text,id:userCredential.user!.uid.toString())), // Navigate to Admin page
+                      email: _emailController.text,
+                      id: userCredential.user!.uid
+                          .toString())), // Navigate to Admin page
             );
-
           }
           ;
         }
@@ -244,7 +245,10 @@ class _SigninScreenState extends State<SigninScreen> {
                   onPressed: () {
                     _resetPassword();
                   },
-                  child: const Text('Forgot Password?'),
+                  child: const Text(
+                    'Forgot Password?',
+                    style: TextStyle(color: Colors.cyan),
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
@@ -256,7 +260,7 @@ class _SigninScreenState extends State<SigninScreen> {
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
-                  backgroundColor: Colors.red,
+                  backgroundColor: Colors.cyan,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -280,7 +284,7 @@ class _SigninScreenState extends State<SigninScreen> {
                     child: const Text(
                       'Sign Up',
                       style: TextStyle(
-                          color: Colors.red, fontWeight: FontWeight.bold),
+                          color: Colors.cyan, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],

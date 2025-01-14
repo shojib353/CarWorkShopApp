@@ -1,9 +1,7 @@
 import 'package:car_workshop_mobile_app/presentation/screens/sign_in_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -20,8 +18,6 @@ class _SignupScreenState extends State<SignupScreen> {
   final _passwordController = TextEditingController();
   String _selectedRole = "Admin";
 
-
-
   // Firebase Authentication instance
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -29,7 +25,8 @@ class _SignupScreenState extends State<SignupScreen> {
     if (_formKey.currentState!.validate()) {
       try {
         // Create a new user with email and password
-        UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+        UserCredential userCredential =
+            await _auth.createUserWithEmailAndPassword(
           email: _emailController.text,
           password: _passwordController.text,
         );
@@ -48,7 +45,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
         // Navigate to the SignIn screen on success
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => SigninScreen(),
+          builder: (context) => const SigninScreen(),
         ));
       } on FirebaseAuthException catch (e) {
         String message = e.message ?? 'An error occurred';
@@ -56,14 +53,14 @@ class _SignupScreenState extends State<SignupScreen> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('Signup Failed'),
+              title: const Text('Signup Failed'),
               content: Text(message),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text('OK'),
+                  child: const Text('OK'),
                 ),
               ],
             );
@@ -72,7 +69,6 @@ class _SignupScreenState extends State<SignupScreen> {
       }
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -84,19 +80,22 @@ class _SignupScreenState extends State<SignupScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 100),
-              Text(
+              const SizedBox(height: 100),
+              const Text(
                 'Sign Up',
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              SizedBox(height: 60),
+              const SizedBox(height: 60),
               Form(
                 key: _formKey,
                 child: Column(
                   children: [
                     TextFormField(
                       controller: _nameController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Name',
                         hintText: 'Enter your full name',
                         border: OutlineInputBorder(),
@@ -108,10 +107,10 @@ class _SignupScreenState extends State<SignupScreen> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     TextFormField(
                       controller: _emailController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Email address',
                         hintText: 'Enter your email',
                         border: OutlineInputBorder(),
@@ -126,10 +125,10 @@ class _SignupScreenState extends State<SignupScreen> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     TextFormField(
                       controller: _phoneController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Phone number',
                         hintText: 'Enter your phone number',
                         border: OutlineInputBorder(),
@@ -144,10 +143,10 @@ class _SignupScreenState extends State<SignupScreen> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     TextFormField(
                       controller: _passwordController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Password',
                         hintText: 'Enter 8-digit password',
                         border: OutlineInputBorder(),
@@ -163,12 +162,14 @@ class _SignupScreenState extends State<SignupScreen> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       children: [
                         Expanded(
                           child: ListTile(
-                            title: Text('Admin'),
+                            title: const Text(
+                              'Admin',
+                            ),
                             leading: Radio<String>(
                               value: 'Admin',
                               groupValue: _selectedRole,
@@ -182,7 +183,9 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         Expanded(
                           child: ListTile(
-                            title: Text('Mechanic'),
+                            title: const Text(
+                              'Mechanic',
+                            ),
                             leading: Radio<String>(
                               value: 'Mechanic',
                               groupValue: _selectedRole,
@@ -199,7 +202,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -207,27 +210,28 @@ class _SignupScreenState extends State<SignupScreen> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  minimumSize: Size(double.infinity, 50),
-                  backgroundColor: Colors.red,
+                  minimumSize: const Size(double.infinity, 50),
+                  backgroundColor: Colors.cyan,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: Text('Sign Up', style: TextStyle(fontSize: 18)),
+                child: const Text('Sign Up',
+                    style: TextStyle(fontSize: 18, color: Colors.white)),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Already have an account? "),
+                  const Text("Already have an account? "),
                   GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: Text(
+                    child: const Text(
                       'Sign In',
                       style: TextStyle(
-                          color: Colors.red, fontWeight: FontWeight.bold),
+                          color: Colors.cyan, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],

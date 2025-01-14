@@ -1,10 +1,8 @@
 import 'package:car_workshop_mobile_app/presentation/screens/booking_screen.dart';
-import 'package:car_workshop_mobile_app/presentation/screens/drawer.dart';
-import 'package:car_workshop_mobile_app/presentation/widgets/home_screen.dart';
+import 'package:car_workshop_mobile_app/presentation/screens/home_screen.dart';
+import 'package:car_workshop_mobile_app/presentation/widgets/drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/calender_screen.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key, required this.email, required this.id});
@@ -17,10 +15,10 @@ class MainPage extends StatefulWidget {
 
 class _HomeScreenState extends State<MainPage> {
   final db = FirebaseFirestore.instance;
-  bool _isBookingScreen = false;
-  int _selectedIndex = 0;
+
   String? userName;
   String? role;
+  bool? isAdmin;
 
   Future<void> getUser() async {
     try {
@@ -35,13 +33,6 @@ class _HomeScreenState extends State<MainPage> {
     } catch (e) {
       debugPrint('Error fetching user data: $e');
     }
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _isBookingScreen = false;
-      _selectedIndex = index;
-    });
   }
 
   @override
@@ -61,23 +52,6 @@ class _HomeScreenState extends State<MainPage> {
       );
     }
 
-    // Pages for bottom navigation
-    final List<Widget> _pages = [
-      HomeScreen(
-        role: role!,
-        onAddMechanicTap: () {
-          setState(() {
-            _isBookingScreen = true;
-          });
-        },
-      ),
-      CalenderScreen(
-        userName: userName!,
-        userRole: role!,
-      ),
-      const BookingScreen(),
-    ];
-
     return Scaffold(
       drawer: AppDrawer(
         userName: userName,
@@ -92,7 +66,15 @@ class _HomeScreenState extends State<MainPage> {
             IconButton(
               onPressed: () {
                 setState(() {
-                  _isBookingScreen = true;
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BookingScreen(
+                        userName: userName!,
+                        userRole: role!,
+                      ),
+                    ),
+                  );
                 });
               },
               icon: const Icon(Icons.add),
@@ -105,22 +87,10 @@ class _HomeScreenState extends State<MainPage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_month_outlined),
-            label: "Calender",
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        fixedColor: Colors.cyan,
-        onTap: _onItemTapped,
+      body: HomeScreen(
+        userRole: role!,
+        userName: userName!,
       ),
-      body: _isBookingScreen ? const BookingScreen() : _pages[_selectedIndex],
     );
   }
 }
