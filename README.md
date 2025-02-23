@@ -1,16 +1,24 @@
-# car_workshop_mobile_app
+Car Service Booking App
+Overview
+The Car Service Booking App allows users to book car services like maintenance, repairs, and wash. This app is designed to streamline the process of scheduling, managing, and tracking car service appointments.
 
-A new Flutter project.
+Features
+User registration and login
+View available services (e.g., maintenance, repairs, washing)
+Book a service appointment
+View booking history
+Admin panel to manage services and bookings
+Demo
+You can view a demonstration of the app on YouTube: Car Service Booking App Demo
 
-## Getting Started
+Collaborators
+Zubaer Haider
+Shojib Shahoriar
+Tamim Hossain
+Md. Ruman
+Technologies Used
+Flutter (for the frontend)
+Firebase (for authentication and database)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+full features video:
+![Watch the video](https://img.youtube.com/vi/kYZ1Kk2aQu0/0.jpg)
