@@ -22,6 +22,9 @@ Firebase (for authentication and database)
 
 full features video:
 ![Watch the video](https://img.youtube.com/vi/kYZ1Kk2aQu0/0.jpg)
+https://youtu.be/kYZ1Kk2aQu0
+
+
 
 
 
